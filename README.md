@@ -6,7 +6,7 @@ A premium SaaS-style web app to analyze any YouTube channel's video performance 
 
 ## Live Demo
 
-> Add your Netlify URL here once deployed
+> https://vidmetrics.netlify.app/
 
 ## Features
 
