@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-const API_KEY = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY
+const API_KEY = process.env.YOUTUBE_API_KEY
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
