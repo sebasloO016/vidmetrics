@@ -2,13 +2,24 @@ import { NextRequest, NextResponse } from 'next/server'
 
 const API_KEY = process.env.YOUTUBE_API_KEY
 
+// Basic input sanitization
+function sanitizeInput(input: string): string {
+  return input.trim().slice(0, 200).replace(/[<>]/g, '')
+}
+
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
-  const channelUrl = searchParams.get('channelUrl')
+  const rawUrl = searchParams.get('channelUrl')
 
-  if (!channelUrl) {
+  if (!rawUrl) {
     return NextResponse.json({ error: 'Channel URL is required' }, { status: 400 })
   }
+
+  if (!API_KEY) {
+    return NextResponse.json({ error: 'API not configured' }, { status: 500 })
+  }
+
+  const channelUrl = sanitizeInput(rawUrl)
 
   try {
     const handle = extractHandle(channelUrl)
